@@ -16,9 +16,16 @@ RomanNumeralConverter::~RomanNumeralConverter()
 
 
 // conversion from arabic numbers to roman numerals
-std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
+std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 {
 	std::string roman;
+
+	// the kata didn't specify any sanity checking, so I am doing none
+	// - unsigned int forces the input to be >= 0
+	// - but large inputs could cause a long string of M's to be produced
+
+	// process the largest values first, leaving progressively smaller integers
+	// to convert and append to the output string
 
 	// add M's for 1000's
 	while ( arabic >= 1000 )

@@ -112,6 +112,35 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 3000 );
 	assert( romanNumeral == "MMM" );
 
+
+	// since there is no roman numeral representing more than 1000,
+	// and the rules dictate that M can only repeat at most 3 times,
+	// the highest arabic integer that can be tested is 3999
+	romanNumeral = converter.ConvertArabicToRoman( 3999 );
+	assert( romanNumeral == "MMMCMXCIX" );
+
+
+	// sanity check for passing in 0
+	romanNumeral = converter.ConvertArabicToRoman( 0 );
+	assert( romanNumeral == "" );
+
+
+	// use cases specified in the kata
+	romanNumeral = converter.ConvertArabicToRoman( 1 );
+	assert( romanNumeral == "I" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 3 );
+	assert( romanNumeral == "III" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 9 );
+	assert( romanNumeral == "IX" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 1066 );
+	assert( romanNumeral == "MLXVI" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 1989 );
+	assert( romanNumeral == "MCMLXXXIX" );
+
 }
 
 

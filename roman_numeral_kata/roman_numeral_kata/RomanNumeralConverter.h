@@ -10,7 +10,7 @@ public:
 	RomanNumeralConverter();
 	~RomanNumeralConverter();
 
-	std::string ConvertArabicToRoman( int arabic );
+	std::string ConvertArabicToRoman( unsigned int arabic );
 
 private:
 };

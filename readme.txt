@@ -5,4 +5,5 @@ To build and run the executable:
 
 (2) From within MS Visual Studio, right-click the "roman_numeral_kata" project (in the Solution Explorer pane) and select "Build".
 
-(3) Press Ctrl-F5 to run. The executable outputs to a console window.
+(3) Press Ctrl-F5 to run. The executable outputs to a console window. If a test case failed, the program would abort with a failed assertion. Otherwise it just prints "Press any key to continue . . ."
+
