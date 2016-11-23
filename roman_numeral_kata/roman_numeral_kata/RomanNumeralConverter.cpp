@@ -190,6 +190,29 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 			arabic += 50;
 			break;
 
+		// roman numeral C
+		case 'C':
+			// look for an C preceding D or M
+			if ( i < (len-1) )
+			{
+				if ( (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				{
+					// this C precedes either D or M, subtract 100
+					arabic -= 100;
+				}
+				else
+				{
+					// this C does not precede D or M, add 100
+					arabic += 100;
+				}
+			}
+			else
+			{
+				// this C is the last character in the roman numeral, add 100
+				arabic += 100;
+			}
+			break;
+
 		default:
 			// found an invalid roman numeral character, return arabic number 0
 			return 0;

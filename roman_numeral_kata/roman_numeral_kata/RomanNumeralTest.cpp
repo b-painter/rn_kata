@@ -181,6 +181,12 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "XL" );
 	assert( arabicNumber == 40 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "LXX" );
+	assert( arabicNumber == 70 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XC" );
+	assert( arabicNumber == 90 );
+
 }
 
 
