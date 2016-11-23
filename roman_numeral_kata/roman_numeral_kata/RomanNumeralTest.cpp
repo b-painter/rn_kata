@@ -160,6 +160,9 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "III" );
 	assert( arabicNumber == 3 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "IV" );
+	assert( arabicNumber == 4 );
+
 	arabicNumber = converter.ConvertRomanToArabic( "V" );
 	assert( arabicNumber == 5 );
 

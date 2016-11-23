@@ -127,9 +127,34 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 {
 	unsigned int arabic = 0;
 
-	for ( std::string::size_type i=0 ; i<roman.length() ; i++ )
+	unsigned int len = roman.length();
+	for ( std::string::size_type i=0 ; i<len ; i++ )
 	{
-		if ( toupper(roman[i]) == 'I' ) arabic += 1;
+		// process any I's
+		if ( toupper(roman[i]) == 'I' ) 
+		{
+			// look for an I preceding V or X
+			if ( i < (len-1) )
+			{
+				if ( (toupper(roman[i+1]) == 'V') || (toupper(roman[i+1]) == 'X') )
+				{
+					// this I precedes either V or X, subtract 1
+					arabic -= 1;
+				}
+				else
+				{
+					// this I does not precede V or X, add 1
+					arabic += 1;
+				}
+			}
+			else
+			{
+				// this I is the last character in the roman numeral, add 1
+				arabic += 1;
+			}
+		}
+
+		// process any V's
 		if ( toupper(roman[i]) == 'V' ) arabic += 5;
 	}
 
