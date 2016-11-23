@@ -94,6 +94,15 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 500 );
 	assert( romanNumeral == "D" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 600 );
+	assert( romanNumeral == "DC" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 800 );
+	assert( romanNumeral == "DCCC" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 900 );
+	assert( romanNumeral == "CM" );
+
 }
 
 
