@@ -91,6 +91,9 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 400 );
 	assert( romanNumeral == "CD" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 500 );
+	assert( romanNumeral == "D" );
+
 }
 
 

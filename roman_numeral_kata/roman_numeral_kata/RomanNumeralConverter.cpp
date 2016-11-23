@@ -20,6 +20,13 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
 {
 	std::string roman;
 
+	// add D's for 500's
+	while ( arabic >= 500 )
+	{
+		roman += "D";
+		arabic -= 500;
+	}
+
 	// add CD's for 400's
 	while ( arabic >= 400 )
 	{
