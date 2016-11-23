@@ -254,6 +254,24 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "MMMM" );
 	assert( arabicNumber == 0 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "IL" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "IC" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "ID" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "IM" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XD" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XM" );
+	assert( arabicNumber == 0 );
+
 }
 
 
