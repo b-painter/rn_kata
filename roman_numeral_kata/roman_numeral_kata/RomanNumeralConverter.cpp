@@ -1,6 +1,7 @@
 #include "RomanNumeralConverter.h"
 
 #include <string>
+#include <cassert>
 
 
 // constructor
@@ -125,14 +126,16 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 // conversion from roman numerals to arabic numbers
 unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 {
-	unsigned int arabic = 0;
+	int arabic = 0;  // signed int here, to handle cases such as IX, where value 
+	                 // will temporarily go negative (-1) before adding 10
 
 	unsigned int len = roman.length();
 	for ( std::string::size_type i=0 ; i<len ; i++ )
 	{
-		// process any I's
-		if ( toupper(roman[i]) == 'I' ) 
+		switch ( toupper(roman[i]) )
 		{
+		// roman numeral I
+		case 'I':
 			// look for an I preceding V or X
 			if ( i < (len-1) )
 			{
@@ -152,16 +155,50 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this I is the last character in the roman numeral, add 1
 				arabic += 1;
 			}
+			break;
+
+		// roman numeral V
+		case 'V':
+			arabic += 5;
+			break;
+
+		// roman numeral X
+		case 'X':
+			// look for an X preceding L or C
+			if ( i < (len-1) )
+			{
+				if ( (toupper(roman[i+1]) == 'L') || (toupper(roman[i+1]) == 'C') )
+				{
+					// this X precedes either L or C, subtract 10
+					arabic -= 10;
+				}
+				else
+				{
+					// this X does not precede L or C, add 10
+					arabic += 10;
+				}
+			}
+			else
+			{
+				// this X is the last character in the roman numeral, add 10
+				arabic += 10;
+			}
+			break;
+
+		// roman numeral L
+		case 'L':
+			arabic += 50;
+			break;
+
+		default:
+			// found an invalid roman numeral character, return arabic number 0
+			return 0;
+			break;
 		}
-
-		// process any V's
-		if ( toupper(roman[i]) == 'V' ) arabic += 5;
-
-		// process any X's
-		if ( toupper(roman[i]) == 'X' ) arabic += 10;
 	}
 
-	return arabic;
+	assert( arabic >= 0 );
+	return (unsigned int)arabic;
 }
 
 

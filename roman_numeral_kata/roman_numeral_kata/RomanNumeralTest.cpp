@@ -172,6 +172,15 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "IX" );
 	assert( arabicNumber == 9 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "X" );
+	assert( arabicNumber == 10 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XXX" );
+	assert( arabicNumber == 30 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XL" );
+	assert( arabicNumber == 40 );
+
 }
 
 
