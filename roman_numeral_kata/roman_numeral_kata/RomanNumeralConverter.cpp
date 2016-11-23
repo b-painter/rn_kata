@@ -18,7 +18,15 @@ RomanNumeralConverter::~RomanNumeralConverter()
 // conversion from arabic numbers to roman numerals
 std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
 {
-	return std::string( "I" );
+	std::string roman;
+
+	while ( arabic >= 1 )
+	{
+		roman += "I";
+		arabic--;
+	}
+
+	return roman;
 }
 
 
