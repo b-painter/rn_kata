@@ -79,6 +79,15 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 149 );
 	assert( romanNumeral == "CXLIX" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 198 );
+	assert( romanNumeral == "CXCVIII" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 200 );
+	assert( romanNumeral == "CC" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 300 );
+	assert( romanNumeral == "CCC" );
+
 }
 
 
