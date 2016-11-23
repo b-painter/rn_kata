@@ -134,12 +134,24 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 	int nbV = 0;
 	int nbL = 0;
 	int nbD = 0;
+	int nbSeqI = 0;
+	int nbSeqX = 0;
+	int nbSeqC = 0;
+	int nbSeqM = 0;
 
 	// process the input string
 	unsigned int len = roman.length();
 	for ( std::string::size_type i=0 ; i<len ; i++ )
 	{
-		switch ( toupper(roman[i]) )
+		char c = toupper(roman[i]);
+
+		// reset the counts for repeating I, X, C, M
+		if ( c != 'I' ) nbSeqI = 0;
+		if ( c != 'X' ) nbSeqX = 0;
+		if ( c != 'C' ) nbSeqC = 0;
+		if ( c != 'M' ) nbSeqM = 0;
+
+		switch ( c )
 		{
 		// roman numeral I
 		case 'I':
@@ -162,6 +174,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this I is the last character in the roman numeral, add 1
 				arabic += 1;
 			}
+			if ( ++nbSeqI > 3 ) invalid = true;
 			break;
 
 		// roman numeral V
@@ -191,6 +204,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this X is the last character in the roman numeral, add 10
 				arabic += 10;
 			}
+			if ( ++nbSeqX > 3 ) invalid = true;
 			break;
 
 		// roman numeral L
@@ -220,6 +234,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this C is the last character in the roman numeral, add 100
 				arabic += 100;
 			}
+			if ( ++nbSeqC > 3 ) invalid = true;
 			break;
 
 		// roman numeral D
@@ -231,6 +246,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 		// roman numeral M
 		case 'M':
 			arabic += 1000;
+			if ( ++nbSeqM > 3 ) invalid = true;
 			break;
 
 		default:

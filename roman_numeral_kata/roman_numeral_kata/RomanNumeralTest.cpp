@@ -232,7 +232,7 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	assert( arabicNumber == 1989 );
 
 
-	// sanity checks for passing in strings that are invalid roman numerals
+	// sanity checks for passing in invalid roman numeral strings
 	arabicNumber = converter.ConvertRomanToArabic( "VV" );
 	assert( arabicNumber == 0 );
 
@@ -240,6 +240,18 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	assert( arabicNumber == 0 );
 
 	arabicNumber = converter.ConvertRomanToArabic( "DD" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "IIII" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XXXX" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "CCCC" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "MMMM" );
 	assert( arabicNumber == 0 );
 
 }
