@@ -122,3 +122,10 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 }
 
 
+// conversion from roman numerals to arabic numbers
+unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string  roman  )
+{
+	return 1;
+}
+
+

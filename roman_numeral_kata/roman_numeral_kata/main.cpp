@@ -9,7 +9,9 @@ int main( void )
 	RomanNumeralTest test;
 
 	// test conversions
-	test.testConversions();
+	test.testArabicToRomanConversions();
+
+	test.testRomanToArabicConversions();
 
 	return 0;
 }

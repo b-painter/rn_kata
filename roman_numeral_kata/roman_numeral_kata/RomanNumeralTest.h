@@ -11,7 +11,8 @@ public:
 	RomanNumeralTest();
 	~RomanNumeralTest();
 
-	void testConversions();
+	void testArabicToRomanConversions();
+	void testRomanToArabicConversions();
 
 private:
 };

@@ -18,8 +18,8 @@ RomanNumeralTest::~RomanNumeralTest()
 }
 
 
-// test cases
-void RomanNumeralTest::testConversions()
+// test cases for arabic to roman conversions
+void RomanNumeralTest::testArabicToRomanConversions()
 {
 	RomanNumeralConverter converter;
 	std::string romanNumeral;
@@ -141,6 +141,18 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 1989 );
 	assert( romanNumeral == "MCMLXXXIX" );
 
+}
+
+
+// test cases for roman to arabic conversions
+void RomanNumeralTest::testRomanToArabicConversions()
+{
+	RomanNumeralConverter converter;
+	unsigned int arabicNumber = 0;
+
+	// roman to arabic tests
+	arabicNumber = converter.ConvertRomanToArabic( "I" );
+	assert( arabicNumber == 1 );
 }
 
 
