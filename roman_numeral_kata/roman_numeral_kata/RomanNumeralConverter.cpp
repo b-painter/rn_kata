@@ -34,6 +34,13 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
 		arabic -= 5;
 	}
 
+	// add IV's for 4's
+	while ( arabic >= 4 )
+	{
+		roman += "IV";
+		arabic -= 4;
+	}
+
 	// add I's for 1's
 	while ( arabic >= 1 )
 	{
