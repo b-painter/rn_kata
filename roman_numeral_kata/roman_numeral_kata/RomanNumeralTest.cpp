@@ -88,6 +88,9 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 300 );
 	assert( romanNumeral == "CCC" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 400 );
+	assert( romanNumeral == "CD" );
+
 }
 
 
