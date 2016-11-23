@@ -299,6 +299,24 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "DM" );
 	assert( arabicNumber == 0 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "IIV" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "IIX" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XXL" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "XXC" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "CCD" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "CCM" );
+	assert( arabicNumber == 0 );
+
 }
 
 

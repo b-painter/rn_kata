@@ -143,7 +143,9 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 	unsigned int len = roman.length();
 	for ( std::string::size_type i=0 ; i<len ; i++ )
 	{
+		// get the current and next characters
 		char c = toupper(roman[i]);
+		char n = toupper(roman[i+1]);
 
 		// reset the counts for repeating I, X, C, M
 		if ( c != 'I' ) nbSeqI = 0;
@@ -155,19 +157,29 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 		{
 		// roman numeral I
 		case 'I':
+			// count multiple sequential I's
+			if ( ++nbSeqI > 3 ) invalid = true;
+
 			// look for an I preceding a higher value character
 			if ( i < (len-1) )
 			{
-				if ( (toupper(roman[i+1]) == 'L') || (toupper(roman[i+1]) == 'C') ||
-					 (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				if ( (n == 'L') || (n == 'C') || (n == 'D') || (n == 'M') )
 				{
-					// invalid subtraction of I
+					// invalid subtraction of I from L, C, D, or M
 					invalid = true;
 				}
-				else if ( (toupper(roman[i+1]) == 'V') || (toupper(roman[i+1]) == 'X') )
+				else if ( (n == 'V') || (n == 'X') )
 				{
-					// this I precedes either V or X, subtract 1
-					arabic -= 1;
+					if ( nbSeqI > 1 )
+					{
+						// invalid multiple I's being subtracted
+						invalid = true;
+					}
+					else
+					{
+						// valid subtraction of I from V or X, subtract 1
+						arabic -= 1;
+					}
 				}
 				else
 				{
@@ -180,7 +192,6 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this I is the last character in the roman numeral, add 1
 				arabic += 1;
 			}
-			if ( ++nbSeqI > 3 ) invalid = true;
 			break;
 
 		// roman numeral V
@@ -188,8 +199,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 			// look for an V preceding an X, L, C, D, or M
 			if ( i < (len-1) )
 			{
-				if ( (toupper(roman[i+1]) == 'X') || (toupper(roman[i+1]) == 'L') || (toupper(roman[i+1]) == 'C') ||
-					 (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				if ( (n == 'X') || (n == 'L') || (n == 'C') || (n == 'D') || (n == 'M') )
 				{
 					// invalid subtraction of V
 					invalid = true;
@@ -201,18 +211,29 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// roman numeral X
 		case 'X':
+			// count multiple sequential X's
+			if ( ++nbSeqX > 3 ) invalid = true;
+
 			// look for an X preceding a higher value character
 			if ( i < (len-1) )
 			{
-				if ( (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				if ( (n == 'D') || (n == 'M') )
 				{
-					// invalid subtraction of X
+					// invalid subtraction of X from D or M
 					invalid = true;
 				}
-				else if ( (toupper(roman[i+1]) == 'L') || (toupper(roman[i+1]) == 'C') )
+				else if ( (n == 'L') || (n == 'C') )
 				{
-					// this X precedes either L or C, subtract 10
-					arabic -= 10;
+					if ( nbSeqX > 1 )
+					{
+						// invalid multiple X's being subtracted
+						invalid = true;
+					}
+					else
+					{
+						// valid subtraction of X from L or C, subtract 10
+						arabic -= 10;
+					}
 				}
 				else
 				{
@@ -225,7 +246,6 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this X is the last character in the roman numeral, add 10
 				arabic += 10;
 			}
-			if ( ++nbSeqX > 3 ) invalid = true;
 			break;
 
 		// roman numeral L
@@ -233,7 +253,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 			// look for an L preceding a C, D, or M
 			if ( i < (len-1) )
 			{
-				if ( (toupper(roman[i+1]) == 'C') || (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				if ( (n == 'C') || (n == 'D') || (n == 'M') )
 				{
 					// invalid subtraction of L
 					invalid = true;
@@ -245,13 +265,24 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// roman numeral C
 		case 'C':
+			// count multiple sequential C's
+			if ( ++nbSeqC > 3 ) invalid = true;
+
 			// look for an C preceding D or M
 			if ( i < (len-1) )
 			{
-				if ( (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				if ( (n == 'D') || (n == 'M') )
 				{
-					// this C precedes either D or M, subtract 100
-					arabic -= 100;
+					if ( nbSeqC > 1 )
+					{
+						// invalid multiple C's being subtracted
+						invalid = true;
+					}
+					else
+					{
+						// valid subtraction of C from D or M, subtract 100
+						arabic -= 100;
+					}
 				}
 				else
 				{
@@ -264,7 +295,6 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 				// this C is the last character in the roman numeral, add 100
 				arabic += 100;
 			}
-			if ( ++nbSeqC > 3 ) invalid = true;
 			break;
 
 		// roman numeral D
@@ -272,7 +302,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 			// look for a D preceding an M
 			if ( i < (len-1) )
 			{
-				if ( toupper(roman[i+1]) == 'M' )
+				if ( n == 'M' )
 				{
 					// invalid subtraction of D
 					invalid = true;
@@ -284,8 +314,10 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// roman numeral M
 		case 'M':
-			arabic += 1000;
+			// count multiple sequential M's
 			if ( ++nbSeqM > 3 ) invalid = true;
+
+			arabic += 1000;
 			break;
 
 		default:
