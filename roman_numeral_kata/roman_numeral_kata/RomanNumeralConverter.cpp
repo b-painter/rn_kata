@@ -213,6 +213,11 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 			}
 			break;
 
+		// roman numeral D
+		case 'D':
+			arabic += 500;
+			break;
+
 		default:
 			// found an invalid roman numeral character, return arabic number 0
 			return 0;

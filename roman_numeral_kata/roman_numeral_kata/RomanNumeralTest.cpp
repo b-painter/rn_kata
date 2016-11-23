@@ -187,6 +187,15 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "XC" );
 	assert( arabicNumber == 90 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "C" );
+	assert( arabicNumber == 100 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "CX" );
+	assert( arabicNumber == 110 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "CD" );
+	assert( arabicNumber == 400 );
+
 }
 
 
