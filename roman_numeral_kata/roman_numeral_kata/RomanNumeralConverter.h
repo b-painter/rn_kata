@@ -14,6 +14,7 @@ public:
 	unsigned int ConvertRomanToArabic( std::string  roman  );
 
 private:
+	bool         BuildRomanNumeral( std::string &roman , unsigned int &arabic , unsigned int value , char *c );
 };
 
 

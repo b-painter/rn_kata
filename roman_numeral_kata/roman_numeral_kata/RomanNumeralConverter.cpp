@@ -16,111 +16,69 @@ RomanNumeralConverter::~RomanNumeralConverter()
 }
 
 
+// function to build up a roman numeral string a piece at a time from the arabic number
+// based on how large the remaining number is
+bool RomanNumeralConverter::BuildRomanNumeral( std::string &roman , unsigned int &arabic , unsigned int value , char *c )
+{
+	bool valid = true;
+	int nbSeq = 0;
+
+	while ( arabic >= value )
+	{
+		if ( ++nbSeq > 3 ) valid = false;
+		roman += c;
+		arabic -= value;
+	}
+
+	return valid;
+}
+
+
 // conversion from arabic numbers to roman numerals
 std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 {
-	std::string roman;
+	// struct definition and array of integer values to convert an arabic number
+	// into roman numeral a piece at time
+	struct ArabicValues
+	{
+		unsigned int arabicValue;
+		char         romanLetters[4];
+	};
+
+	ArabicValues arabicValues[] = 
+	{
+		// process the largest values first, leaving progressively smaller integers
+		// to convert and append to the output string
+		{ 1000 , "M"  } ,
+		{  900 , "CM" } ,
+		{  500 , "D"  } ,
+		{  400 , "CD" } ,
+		{  100 , "C"  } ,
+		{   90 , "XC" } ,
+		{   50 , "L"  } ,
+		{   40 , "XL" } ,
+		{   10 , "X"  } ,
+		{    9 , "IX" } ,
+		{    5 , "V"  } ,
+		{    4 , "IV" } ,
+		{    1 , "I"  } ,
+	};
+
 
 	// variables used to check the input number for validity
 	bool invalid = false;
 	int nbSeqM = 0;
 
-	// process the largest values first, leaving progressively smaller integers
-	// to convert and append to the output string
+	// perform the conversion from arabic to roman
+	std::string roman;
 
-	// add M's for 1000's
-	while ( arabic >= 1000 )
+	for ( int i=0 ; i<sizeof(arabicValues)/sizeof(ArabicValues) ; i++ )
 	{
-		// count multiple sequential M's
-		if ( ++nbSeqM > 3 ) invalid = true;
-		roman += "M";
-		arabic -= 1000;
+		bool validConversion = BuildRomanNumeral( roman , arabic , arabicValues[i].arabicValue , arabicValues[i].romanLetters );
+		if ( ! validConversion ) invalid = true;
 	}
 
-	// add CM's for 900's
-	while ( arabic >= 900 )
-	{
-		roman += "CM";
-		arabic -= 900;
-	}
-
-	// add D's for 500's
-	while ( arabic >= 500 )
-	{
-		roman += "D";
-		arabic -= 500;
-	}
-
-	// add CD's for 400's
-	while ( arabic >= 400 )
-	{
-		roman += "CD";
-		arabic -= 400;
-	}
-
-	// add C's for 100's
-	while ( arabic >= 100 )
-	{
-		roman += "C";
-		arabic -= 100;
-	}
-
-	// add XC's for 90's
-	while ( arabic >= 90 )
-	{
-		roman += "XC";
-		arabic -= 90;
-	}
-
-	// add L's for 50's
-	while ( arabic >= 50 )
-	{
-		roman += "L";
-		arabic -= 50;
-	}
-
-	// add XL's for 40's
-	while ( arabic >= 40 )
-	{
-		roman += "XL";
-		arabic -= 40;
-	}
-
-	// add X's for 10's
-	while ( arabic >= 10 )
-	{
-		roman += "X";
-		arabic -= 10;
-	}
-
-	// add IX's for 9's
-	while ( arabic >= 9 )
-	{
-		roman += "IX";
-		arabic -= 9;
-	}
-
-	// add V's for 5's
-	while ( arabic >= 5 )
-	{
-		roman += "V";
-		arabic -= 5;
-	}
-
-	// add IV's for 4's
-	while ( arabic >= 4 )
-	{
-		roman += "IV";
-		arabic -= 4;
-	}
-
-	// add I's for 1's
-	while ( arabic >= 1 )
-	{
-		roman += "I";
-		arabic--;
-	}
-
+	// return result
 	if ( invalid ) return "";
 
 	return roman;
