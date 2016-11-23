@@ -49,6 +49,15 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 10 );
 	assert( romanNumeral == "X" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 11 );
+	assert( romanNumeral == "XI" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 20 );
+	assert( romanNumeral == "XX" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 50 );
+	assert( romanNumeral == "L" );
+
 }
 
 

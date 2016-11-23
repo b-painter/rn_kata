@@ -20,6 +20,20 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
 {
 	std::string roman;
 
+	// add L's for 50's
+	while ( arabic >= 50 )
+	{
+		roman += "L";
+		arabic -= 50;
+	}
+
+	// add XL's for 40's
+	while ( arabic >= 40 )
+	{
+		roman += "XL";
+		arabic -= 40;
+	}
+
 	// add X's for 10's
 	while ( arabic >= 10 )
 	{
