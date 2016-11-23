@@ -21,9 +21,9 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 {
 	std::string roman;
 
-	// the kata didn't specify any sanity checking, so I am doing none
-	// - unsigned int forces the input to be >= 0
-	// - but large inputs could cause a long string of M's to be produced
+	// variables used to check the input number for validity
+	bool invalid = false;
+	int nbSeqM = 0;
 
 	// process the largest values first, leaving progressively smaller integers
 	// to convert and append to the output string
@@ -31,6 +31,8 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 	// add M's for 1000's
 	while ( arabic >= 1000 )
 	{
+		// count multiple sequential M's
+		if ( ++nbSeqM > 3 ) invalid = true;
 		roman += "M";
 		arabic -= 1000;
 	}
@@ -118,6 +120,8 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 		roman += "I";
 		arabic--;
 	}
+
+	if ( invalid ) return "";
 
 	return roman;
 }

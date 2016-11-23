@@ -69,6 +69,9 @@ void RomanNumeralTest::testArabicToRomanConversions()
 		// the highest arabic integer that can be tested is 3999
 		{ 3999 , "MMMCMXCIX" } , 
 
+		// sanity check that converter will not return "MMMM"
+		{ 4000 , "" } , 
+
 		// sanity check for passing in 0
 		{    0 , "" } , 
 
