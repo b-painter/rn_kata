@@ -185,6 +185,16 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// roman numeral V
 		case 'V':
+			// look for an V preceding an X, L, C, D, or M
+			if ( i < (len-1) )
+			{
+				if ( (toupper(roman[i+1]) == 'X') || (toupper(roman[i+1]) == 'L') || (toupper(roman[i+1]) == 'C') ||
+					 (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				{
+					// invalid subtraction of V
+					invalid = true;
+				}
+			}
 			arabic += 5;
 			if ( ++nbV > 1 ) invalid = true;
 			break;
@@ -220,6 +230,15 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// roman numeral L
 		case 'L':
+			// look for an L preceding a C, D, or M
+			if ( i < (len-1) )
+			{
+				if ( (toupper(roman[i+1]) == 'C') || (toupper(roman[i+1]) == 'D') || (toupper(roman[i+1]) == 'M') )
+				{
+					// invalid subtraction of L
+					invalid = true;
+				}
+			}
 			arabic += 50;
 			if ( ++nbL > 1 ) invalid = true;
 			break;
@@ -250,6 +269,15 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// roman numeral D
 		case 'D':
+			// look for a D preceding an M
+			if ( i < (len-1) )
+			{
+				if ( toupper(roman[i+1]) == 'M' )
+				{
+					// invalid subtraction of D
+					invalid = true;
+				}
+			}
 			arabic += 500;
 			if ( ++nbD > 1 ) invalid = true;
 			break;

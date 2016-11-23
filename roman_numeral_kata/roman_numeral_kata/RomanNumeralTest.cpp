@@ -272,6 +272,33 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "XM" );
 	assert( arabicNumber == 0 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "VX" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "VL" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "VC" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "VD" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "VM" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "LC" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "LD" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "LM" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "DM" );
+	assert( arabicNumber == 0 );
+
 }
 
 
