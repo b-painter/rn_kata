@@ -129,7 +129,8 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 	for ( std::string::size_type i=0 ; i<roman.length() ; i++ )
 	{
-		if ( roman[i] == 'I' ) arabic++;
+		if ( toupper(roman[i]) == 'I' ) arabic += 1;
+		if ( toupper(roman[i]) == 'V' ) arabic += 5;
 	}
 
 	return arabic;
