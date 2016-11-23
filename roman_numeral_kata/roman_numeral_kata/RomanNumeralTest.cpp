@@ -231,6 +231,17 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "MCMLXXXIX" );
 	assert( arabicNumber == 1989 );
 
+
+	// sanity checks for passing in strings that are invalid roman numerals
+	arabicNumber = converter.ConvertRomanToArabic( "VV" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "LL" );
+	assert( arabicNumber == 0 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "DD" );
+	assert( arabicNumber == 0 );
+
 }
 
 

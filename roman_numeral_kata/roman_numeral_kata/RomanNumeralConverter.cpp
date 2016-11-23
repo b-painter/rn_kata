@@ -129,6 +129,13 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 	int arabic = 0;  // signed int here, to handle cases such as IX, where value 
 	                 // will temporarily go negative (-1) before adding 10
 
+	// variables used to check the input string for validity
+	bool invalid = false;
+	int nbV = 0;
+	int nbL = 0;
+	int nbD = 0;
+
+	// process the input string
 	unsigned int len = roman.length();
 	for ( std::string::size_type i=0 ; i<len ; i++ )
 	{
@@ -160,6 +167,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 		// roman numeral V
 		case 'V':
 			arabic += 5;
+			if ( ++nbV > 1 ) invalid = true;
 			break;
 
 		// roman numeral X
@@ -188,6 +196,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 		// roman numeral L
 		case 'L':
 			arabic += 50;
+			if ( ++nbL > 1 ) invalid = true;
 			break;
 
 		// roman numeral C
@@ -216,6 +225,7 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 		// roman numeral D
 		case 'D':
 			arabic += 500;
+			if ( ++nbD > 1 ) invalid = true;
 			break;
 
 		// roman numeral M
@@ -225,10 +235,12 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		default:
 			// found an invalid roman numeral character, return arabic number 0
-			return 0;
+			invalid = true;
 			break;
 		}
 	}
+
+	if ( invalid ) return 0;
 
 	assert( arabic >= 0 );
 	return (unsigned int)arabic;
