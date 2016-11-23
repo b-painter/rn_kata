@@ -123,9 +123,16 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( unsigned int arabic )
 
 
 // conversion from roman numerals to arabic numbers
-unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string  roman  )
+unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 {
-	return 1;
+	unsigned int arabic = 0;
+
+	for ( std::string::size_type i=0 ; i<roman.length() ; i++ )
+	{
+		if ( roman[i] == 'I' ) arabic++;
+	}
+
+	return arabic;
 }
 
 

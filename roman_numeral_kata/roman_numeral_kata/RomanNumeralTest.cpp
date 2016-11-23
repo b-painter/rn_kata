@@ -153,6 +153,10 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	// roman to arabic tests
 	arabicNumber = converter.ConvertRomanToArabic( "I" );
 	assert( arabicNumber == 1 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "II" );
+	assert( arabicNumber == 2 );
+
 }
 
 
