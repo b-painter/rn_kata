@@ -103,6 +103,15 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 900 );
 	assert( romanNumeral == "CM" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 1000 );
+	assert( romanNumeral == "M" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 2000 );
+	assert( romanNumeral == "MM" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 3000 );
+	assert( romanNumeral == "MMM" );
+
 }
 
 
