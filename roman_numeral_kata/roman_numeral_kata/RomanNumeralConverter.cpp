@@ -101,6 +101,10 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 	int nbSeqC = 0;
 	int nbSeqM = 0;
 
+	// TODO:
+	// possibly find the common code in the cases of IXCM and VLD below
+	// and refactor to simplify the cases in the following switch
+
 	// process the input string
 	unsigned int len = roman.length();
 	for ( std::string::size_type i=0 ; i<len ; i++ )
