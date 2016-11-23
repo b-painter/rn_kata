@@ -27,6 +27,13 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
 		arabic -= 10;
 	}
 
+	// add IX's for 9's
+	while ( arabic >= 9 )
+	{
+		roman += "IX";
+		arabic -= 9;
+	}
+
 	// add V's for 5's
 	while ( arabic >= 5 )
 	{

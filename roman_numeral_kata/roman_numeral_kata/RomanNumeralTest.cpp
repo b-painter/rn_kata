@@ -40,6 +40,12 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 5 );
 	assert( romanNumeral == "V" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 8 );
+	assert( romanNumeral == "VIII" );
+
+	romanNumeral = converter.ConvertArabicToRoman( 9 );
+	assert( romanNumeral == "IX" );
+
 	romanNumeral = converter.ConvertArabicToRoman( 10 );
 	assert( romanNumeral == "X" );
 
