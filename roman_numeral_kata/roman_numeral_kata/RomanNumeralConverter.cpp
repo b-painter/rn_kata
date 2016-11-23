@@ -20,6 +20,12 @@ std::string RomanNumeralConverter::ConvertArabicToRoman( int arabic )
 {
 	std::string roman;
 
+	while ( arabic >= 5 )
+	{
+		roman += "V";
+		arabic -= 5;
+	}
+
 	while ( arabic >= 1 )
 	{
 		roman += "I";

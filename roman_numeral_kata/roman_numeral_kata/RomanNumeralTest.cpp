@@ -34,6 +34,9 @@ void RomanNumeralTest::testConversions()
 	romanNumeral = converter.ConvertArabicToRoman( 3 );
 	assert( romanNumeral == "III" );
 
+	romanNumeral = converter.ConvertArabicToRoman( 5 );
+	assert( romanNumeral == "V" );
+
 }
 
 
