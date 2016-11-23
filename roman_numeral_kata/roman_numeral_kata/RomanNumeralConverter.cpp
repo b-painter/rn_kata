@@ -156,6 +156,9 @@ unsigned int RomanNumeralConverter::ConvertRomanToArabic( std::string roman  )
 
 		// process any V's
 		if ( toupper(roman[i]) == 'V' ) arabic += 5;
+
+		// process any X's
+		if ( toupper(roman[i]) == 'X' ) arabic += 10;
 	}
 
 	return arabic;
