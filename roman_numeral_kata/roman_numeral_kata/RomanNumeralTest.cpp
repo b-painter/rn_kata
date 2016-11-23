@@ -4,6 +4,8 @@
 
 #include <string>
 #include <cassert>
+#include <iostream>
+#include <iomanip>
 
 
 // constructor
@@ -18,305 +20,177 @@ RomanNumeralTest::~RomanNumeralTest()
 }
 
 
+// struct for initializing converstions to test
+struct ArabicRomanPair
+{
+	unsigned int arabicNumber;
+	char         romanNumeral[16];
+};
+
+
 // test cases for arabic to roman conversions
 void RomanNumeralTest::testArabicToRomanConversions()
 {
+	ArabicRomanPair testPairs[] = 
+	{
+		// test cases used during development
+		{    1 , "I" } ,
+		{    2 , "II" } ,
+		{    3 , "III" } ,
+		{    4 , "IV" } ,
+		{    5 , "V" } ,
+		{    8 , "VIII" } ,
+		{    9 , "IX" } ,
+		{   10 , "X" } ,
+		{   11 , "XI" } ,
+		{   20 , "XX" } ,
+		{   40 , "XL" } ,
+		{   50 , "L" } ,
+		{   60 , "LX" } ,
+		{   90 , "XC" } ,
+		{  100 , "C" } ,
+		{  110 , "CX" } ,
+		{  111 , "CXI" } ,
+		{  149 , "CXLIX" } ,
+		{  198 , "CXCVIII" } ,
+		{  200 , "CC" } ,
+		{  300 , "CCC" } ,
+		{  400 , "CD" } ,
+		{  500 , "D" } ,
+		{  600 , "DC" } ,
+		{  800 , "DCCC" } ,
+		{  900 , "CM" } ,
+		{ 1000 , "M" } ,
+		{ 2000 , "MM" } ,
+		{ 3000 , "MMM" } ,
+
+		// since there is no roman numeral representing more than 1000,
+		// and the rules dictate that M can only repeat at most 3 times,
+		// the highest arabic integer that can be tested is 3999
+		{ 3999 , "MMMCMXCIX" } , 
+
+		// sanity check for passing in 0
+		{    0 , "" } , 
+
+		// test cases specified in the kata
+		{    1 , "I" } , 
+		{    3 , "III" } , 
+		{    9 , "IX" } , 
+		{ 1066 , "MLXVI" } , 
+		{ 1989 , "MCMLXXXIX" } , 
+	};
+
+
+	// execute the arabic to roman test cases
 	RomanNumeralConverter converter;
 	std::string romanNumeral;
 
-	// arabic to roman tests
-	romanNumeral = converter.ConvertArabicToRoman( 1 );
-	assert( romanNumeral == "I" );
+	for ( int i=0 ; i<sizeof(testPairs)/sizeof(ArabicRomanPair) ; i++ )
+	{
+		// output to console the conversion about to occur
+		std::cout << "Testing conversion from " 
+			      << std::right << std::setw( 4) << testPairs[i].arabicNumber << " to " 
+				  << std::left  << std::setw(10) << testPairs[i].romanNumeral << " : ";
 
-	romanNumeral = converter.ConvertArabicToRoman( 2 );
-	assert( romanNumeral == "II" );
+		// perform the conversion
+		romanNumeral = converter.ConvertArabicToRoman( testPairs[i].arabicNumber );
 
-	romanNumeral = converter.ConvertArabicToRoman( 3 );
-	assert( romanNumeral == "III" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 4 );
-	assert( romanNumeral == "IV" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 5 );
-	assert( romanNumeral == "V" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 8 );
-	assert( romanNumeral == "VIII" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 9 );
-	assert( romanNumeral == "IX" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 10 );
-	assert( romanNumeral == "X" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 11 );
-	assert( romanNumeral == "XI" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 20 );
-	assert( romanNumeral == "XX" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 40 );
-	assert( romanNumeral == "XL" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 50 );
-	assert( romanNumeral == "L" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 60 );
-	assert( romanNumeral == "LX" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 90 );
-	assert( romanNumeral == "XC" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 100 );
-	assert( romanNumeral == "C" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 110 );
-	assert( romanNumeral == "CX" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 111 );
-	assert( romanNumeral == "CXI" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 149 );
-	assert( romanNumeral == "CXLIX" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 198 );
-	assert( romanNumeral == "CXCVIII" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 200 );
-	assert( romanNumeral == "CC" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 300 );
-	assert( romanNumeral == "CCC" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 400 );
-	assert( romanNumeral == "CD" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 500 );
-	assert( romanNumeral == "D" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 600 );
-	assert( romanNumeral == "DC" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 800 );
-	assert( romanNumeral == "DCCC" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 900 );
-	assert( romanNumeral == "CM" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 1000 );
-	assert( romanNumeral == "M" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 2000 );
-	assert( romanNumeral == "MM" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 3000 );
-	assert( romanNumeral == "MMM" );
-
-
-	// since there is no roman numeral representing more than 1000,
-	// and the rules dictate that M can only repeat at most 3 times,
-	// the highest arabic integer that can be tested is 3999
-	romanNumeral = converter.ConvertArabicToRoman( 3999 );
-	assert( romanNumeral == "MMMCMXCIX" );
-
-
-	// sanity check for passing in 0
-	romanNumeral = converter.ConvertArabicToRoman( 0 );
-	assert( romanNumeral == "" );
-
-
-	// use cases specified in the kata
-	romanNumeral = converter.ConvertArabicToRoman( 1 );
-	assert( romanNumeral == "I" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 3 );
-	assert( romanNumeral == "III" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 9 );
-	assert( romanNumeral == "IX" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 1066 );
-	assert( romanNumeral == "MLXVI" );
-
-	romanNumeral = converter.ConvertArabicToRoman( 1989 );
-	assert( romanNumeral == "MCMLXXXIX" );
-
+		// evaluate the conversion and output to console
+		bool didPass = (romanNumeral == testPairs[i].romanNumeral);
+		std::cout << (didPass ? "passed" : "       FAILED") << std::endl;
+	}
 }
 
 
 // test cases for roman to arabic conversions
 void RomanNumeralTest::testRomanToArabicConversions()
 {
+	ArabicRomanPair testPairs[] = 
+	{
+		// test cases used during development
+		{    1 , "I" } ,
+		{    2 , "II" } ,
+		{    3 , "III" } ,
+		{    4 , "IV" } ,
+		{    5 , "V" } ,
+		{    6 , "VI" } ,
+		{    9 , "IX" } ,
+		{   10 , "X" } ,
+		{   30 , "XXX" } ,
+		{   40 , "XL" } ,
+		{   70 , "LXX" } ,
+		{   90 , "XC" } ,
+		{  100 , "C" } ,
+		{  110 , "CX" } ,
+		{  400 , "CD" } ,
+		{  600 , "DC" } ,
+		{ 1000 , "M" } ,
+
+		// since there is no roman numeral representing more than 1000,
+		// and the rules dictate that M can only repeat at most 3 times,
+		// the highest arabic integer that can be tested is 3999
+		{ 3999 , "MMMCMXCIX" } ,
+
+		// sanity check for passing in string with invalid character
+		{    0 , "G" } ,
+
+		// use cases specified in the kata
+		{    1 , "I" } ,
+		{    3 , "III" } ,
+		{    9 , "IX" } ,
+		{ 1066 , "MLXVI" } ,
+		{ 1989 , "MCMLXXXIX" } ,
+
+		// sanity checks for passing in invalid roman numeral strings
+		{    0 , "VV" } ,
+		{    0 , "LL" } ,
+		{    0 , "DD" } ,
+		{    0 , "IIII" } ,
+		{    0 , "XXXX" } ,
+		{    0 , "CCCC" } ,
+		{    0 , "MMMM" } ,
+		{    0 , "IL" } ,
+		{    0 , "IC" } ,
+		{    0 , "ID" } ,
+		{    0 , "IM" } ,
+		{    0 , "XD" } ,
+		{    0 , "XM" } ,
+		{    0 , "VX" } ,
+		{    0 , "VL" } ,
+		{    0 , "VC" } ,
+		{    0 , "VD" } ,
+		{    0 , "VM" } ,
+		{    0 , "LC" } ,
+		{    0 , "LD" } ,
+		{    0 , "LM" } ,
+		{    0 , "DM" } ,
+		{    0 , "IIV" } ,
+		{    0 , "IIX" } ,
+		{    0 , "XXL" } ,
+		{    0 , "XXC" } ,
+		{    0 , "CCD" } ,
+		{    0 , "CCM" } ,
+	};
+
+
+	// execute the roman to arabic test cases
 	RomanNumeralConverter converter;
 	unsigned int arabicNumber = 0;
 
-	// roman to arabic tests
-	arabicNumber = converter.ConvertRomanToArabic( "I" );
-	assert( arabicNumber == 1 );
+	for ( int i=0 ; i<sizeof(testPairs)/sizeof(ArabicRomanPair) ; i++ )
+	{
+		// output to console the conversion about to occur
+		std::cout << "Testing conversion from " 
+				  << std::left  << std::setw(10) << testPairs[i].romanNumeral << " to "
+			      << std::right << std::setw( 4) << testPairs[i].arabicNumber << " : " ;
 
-	arabicNumber = converter.ConvertRomanToArabic( "II" );
-	assert( arabicNumber == 2 );
+		// perform the conversion
+		arabicNumber = converter.ConvertRomanToArabic( testPairs[i].romanNumeral );
 
-	arabicNumber = converter.ConvertRomanToArabic( "III" );
-	assert( arabicNumber == 3 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IV" );
-	assert( arabicNumber == 4 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "V" );
-	assert( arabicNumber == 5 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "VI" );
-	assert( arabicNumber == 6 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IX" );
-	assert( arabicNumber == 9 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "X" );
-	assert( arabicNumber == 10 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XXX" );
-	assert( arabicNumber == 30 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XL" );
-	assert( arabicNumber == 40 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "LXX" );
-	assert( arabicNumber == 70 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XC" );
-	assert( arabicNumber == 90 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "C" );
-	assert( arabicNumber == 100 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "CX" );
-	assert( arabicNumber == 110 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "CD" );
-	assert( arabicNumber == 400 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "DC" );
-	assert( arabicNumber == 600 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "M" );
-	assert( arabicNumber == 1000 );
-
-
-	// since there is no roman numeral representing more than 1000,
-	// and the rules dictate that M can only repeat at most 3 times,
-	// the highest arabic integer that can be tested is 3999
-	arabicNumber = converter.ConvertRomanToArabic( "MMMCMXCIX" );
-	assert( arabicNumber == 3999 );
-
-
-	// sanity check for passing in string with invalid character
-	arabicNumber = converter.ConvertRomanToArabic( "G" );
-	assert( arabicNumber == 0 );
-
-
-	// use cases specified in the kata
-	arabicNumber = converter.ConvertRomanToArabic( "I" );
-	assert( arabicNumber == 1 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "III" );
-	assert( arabicNumber == 3 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IX" );
-	assert( arabicNumber == 9 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "MLXVI" );
-	assert( arabicNumber == 1066 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "MCMLXXXIX" );
-	assert( arabicNumber == 1989 );
-
-
-	// sanity checks for passing in invalid roman numeral strings
-	arabicNumber = converter.ConvertRomanToArabic( "VV" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "LL" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "DD" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IIII" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XXXX" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "CCCC" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "MMMM" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IL" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IC" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "ID" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IM" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XD" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XM" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "VX" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "VL" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "VC" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "VD" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "VM" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "LC" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "LD" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "LM" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "DM" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IIV" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "IIX" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XXL" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "XXC" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "CCD" );
-	assert( arabicNumber == 0 );
-
-	arabicNumber = converter.ConvertRomanToArabic( "CCM" );
-	assert( arabicNumber == 0 );
-
+		// evaluate the conversion and output to console
+		bool didPass = (arabicNumber == testPairs[i].arabicNumber);
+		std::cout << (didPass ? "passed" : "       FAILED") << std::endl;
+	}
 }
 
 
