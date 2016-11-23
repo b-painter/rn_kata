@@ -196,6 +196,12 @@ void RomanNumeralTest::testRomanToArabicConversions()
 	arabicNumber = converter.ConvertRomanToArabic( "CD" );
 	assert( arabicNumber == 400 );
 
+	arabicNumber = converter.ConvertRomanToArabic( "DC" );
+	assert( arabicNumber == 600 );
+
+	arabicNumber = converter.ConvertRomanToArabic( "M" );
+	assert( arabicNumber == 1000 );
+
 }
 
 
